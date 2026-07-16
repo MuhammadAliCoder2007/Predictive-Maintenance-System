@@ -2,6 +2,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 import pandas as pd
 import joblib
+from sklearn.metrics import accuracy_score
 
 df = pd.read_csv("data/machine_failure.csv")
 
@@ -21,3 +22,6 @@ print("Model trained successfully.")
 
 joblib.dump(model, "models/machine_failure_model.pkl")
 
+y_pred = model.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {accuracy*100:.2f}%")
