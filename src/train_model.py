@@ -20,8 +20,10 @@ model.fit(X_train, y_train)
 
 print("Model trained successfully.")
 
-joblib.dump(model, "models/machine_failure_model.pkl")
+
 
 y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy: {accuracy*100:.2f}%")
+
+joblib.dump(model, "models/machine_failure_model.pkl")
