@@ -1,15 +1,16 @@
 import streamlit as st
 
 from src.predict import predict
+from src.predict import predict_probability
 
 st.title("Predictive Maintenance System")
 st.write("Enter machine senor readings: ")
 
-temperature = st.number_input("Temperature (°C)", min_value=0.0)
-vibration = st.number_input("Vibration", min_value=0.0)
-pressure = st.number_input("Pressure", min_value=0.0)
-humidity = st.number_input("Humidity (%)", min_value=0.0)
-rpm = st.number_input("RPM", min_value=0)
+temperature = st.number_input("Temperature (°C)", min_value=0.0,value = 76.0)
+vibration = st.number_input("Vibration", min_value=0.0,value = 0.35)
+pressure = st.number_input("Pressure", min_value=0.0,value = 104.0)
+humidity = st.number_input("Humidity (%)", min_value=0.0,value = 46.0)
+rpm = st.number_input("RPM", min_value=0,value = 1500)
 
 
 if st.button("Predict"):
@@ -17,3 +18,5 @@ if st.button("Predict"):
         st.write("Machine is likely to fail")
     else:
         st.write("Machine is likely to not fail")
+    failure_probability = predict_probability(temperature, vibration, pressure, humidity, rpm)
+    st.write(f"Failure probability: {failure_probability:.2%}")
