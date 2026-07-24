@@ -15,8 +15,10 @@ rpm = st.number_input("RPM", min_value=0,value = 1500)
 
 if st.button("Predict"):
     if predict(temperature, vibration, pressure, humidity, rpm)==1:
-        st.write("Machine is likely to fail")
+        st.error("Machine is likely to fail")
     else:
-        st.write("Machine is likely to not fail")
+        st.success("Machine is likely to not fail")
+
+
     failure_probability = predict_probability(temperature, vibration, pressure, humidity, rpm)
-    st.write(f"Failure probability: {failure_probability:.2%}")
+    st.write(f"Confidence: {failure_probability:.1f}%")
